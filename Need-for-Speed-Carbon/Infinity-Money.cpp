@@ -22,7 +22,7 @@ void SetMoney(HANDLE hProcess, DWORD_PTR address, int value) {
 
 // Função principal para monitorar a tecla F1
 void MonitorKeyPress(HANDLE hProcess) {
-    // Base Address e offsets fornecidos
+    // Base Address e offsets coletados
     DWORD_PTR baseAddress = (DWORD_PTR)GetModuleHandle(L"NFSC.exe") + 0x0068AD08; // Base address do Cheat Engine
     std::vector<DWORD> offsets = { 0x4, 0x54 }; // Offsets extraídos do Cheat Engine
 
@@ -30,10 +30,10 @@ void MonitorKeyPress(HANDLE hProcess) {
         if (GetAsyncKeyState(VK_F1) & 0x8000) {
             DWORD_PTR moneyAddress = ResolvePointer(hProcess, baseAddress, offsets); // Resolve o ponteiro dinâmico
             SetMoney(hProcess, moneyAddress, 9999999); // Altera o valor do dinheiro para 9.999.999
-            MessageBox(NULL, L"Dinheiro alterado para 9.999.999!", L"Cheat Ativado", MB_OK);
-            Sleep(500); // Evita múltiplas ativações rápidas
+            MessageBox(NULL, L"Dinheiro alterado para 9.999.999", L"Cheat Ativado", MB_OK);
+            Sleep(500); 
         }
-        Sleep(100); // Previne uso excessivo de CPU
+        Sleep(100); 
     }
 }
 
@@ -45,9 +45,9 @@ DWORD WINAPI MainThread(LPVOID param) {
         return 1;
     }
 
-    MessageBox(NULL, L"DLL injetada com sucesso!", L"Cheat DLL", MB_OK);
+    MessageBox(NULL, L"DLL injetada com sucesso", L"Infinity Money Cheat DLL", MB_OK);
     MonitorKeyPress(hProcess); // Inicia o monitoramento de teclas
-    CloseHandle(hProcess); // Fecha o handle do processo
+    CloseHandle(hProcess); 
     return 0;
 }
 
