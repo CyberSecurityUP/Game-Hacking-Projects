@@ -1,7 +1,10 @@
 /*
 Cheat feito por Joas A Santos
 */
-#include "pch.h"
+#include <Windows.h>
+#include <vector>
+#include <iostream>
+#include "pch.h" // Modulos anteriores incluidos aqui
 
 // Função para calcular o endereço dinâmico
 DWORD_PTR ResolvePointer(HANDLE hProcess, DWORD_PTR baseAddress, const std::vector<DWORD>& offsets) {
